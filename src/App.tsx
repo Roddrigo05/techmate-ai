@@ -10,6 +10,8 @@ import { Loader2 } from "lucide-react";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import NewIntervention from "./pages/NewIntervention";
+import Interventions from "./pages/Interventions";
+import InterventionDetail from "./pages/InterventionDetail";
 import Inventory from "./pages/Inventory";
 import Machines from "./pages/Machines";
 import MachineDetail from "./pages/MachineDetail";
@@ -59,9 +61,21 @@ function AppRoutes() {
         </ProtectedRoute>
       } />
       
+      <Route path="/interventions" element={
+        <ProtectedRoute>
+          <Interventions />
+        </ProtectedRoute>
+      } />
+      
       <Route path="/interventions/new" element={
         <ProtectedRoute>
           <NewIntervention />
+        </ProtectedRoute>
+      } />
+      
+      <Route path="/interventions/:id" element={
+        <ProtectedRoute>
+          <InterventionDetail />
         </ProtectedRoute>
       } />
       

@@ -20,6 +20,7 @@ interface AppLayoutProps {
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+  { name: 'Intervenções', href: '/interventions', icon: Wrench },
   { name: 'Nova Intervenção', href: '/interventions/new', icon: Mic },
   { name: 'Inventário', href: '/inventory', icon: Package },
   { name: 'Máquinas', href: '/machines', icon: Settings },
