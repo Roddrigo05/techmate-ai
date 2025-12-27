@@ -5,7 +5,6 @@ import { AppLayout } from '@/components/layout/AppLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
 import { 
   Settings, 
   MapPin, 
@@ -15,17 +14,9 @@ import {
   Wrench,
   ExternalLink
 } from 'lucide-react';
+import type { Tables } from '@/integrations/supabase/types';
 
-interface Machine {
-  id: string;
-  model: string;
-  location: string;
-  manual_pdf_url: string | null;
-  specifications: Record<string, unknown> | null;
-  image_url: string | null;
-  is_active: boolean;
-  created_at: string;
-}
+type Machine = Tables<'machines'>;
 
 interface Part {
   id: string;
@@ -166,13 +157,13 @@ export default function MachineDetail() {
               <CardContent>
                 {machine.specifications && typeof machine.specifications === 'object' && Object.keys(machine.specifications).length > 0 ? (
                   <div className="grid gap-4 sm:grid-cols-2">
-                    {Object.entries(machine.specifications).map(([key, value]) => (
+                    {Object.entries(machine.specifications as Record<string, unknown>).map(([key, value]) => (
                       <div key={key} className="rounded-lg border border-border bg-muted/30 p-4">
                         <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                           {key}
                         </p>
                         <p className="mt-1 text-lg font-semibold text-foreground">
-                          {value}
+                          {String(value)}
                         </p>
                       </div>
                     ))}
