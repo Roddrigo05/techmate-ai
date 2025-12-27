@@ -7,17 +7,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Settings, Search, MapPin, FileText, ArrowRight, Plus } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import type { Tables } from '@/integrations/supabase/types';
 
-interface Machine {
-  id: string;
-  model: string;
-  location: string;
-  manual_pdf_url: string | null;
-  specifications: Record<string, unknown> | null;
-  image_url: string | null;
-  is_active: boolean;
-}
+type Machine = Tables<'machines'>;
 
 export default function Machines() {
   const [machines, setMachines] = useState<Machine[]>([]);
@@ -128,9 +120,9 @@ export default function Machines() {
                         Especificações
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        {Object.entries(machine.specifications).slice(0, 3).map(([key, value]) => (
+                        {Object.entries(machine.specifications as Record<string, unknown>).slice(0, 3).map(([key, value]) => (
                           <Badge key={key} variant="outline" className="text-xs">
-                            {key}: {value}
+                            {key}: {String(value)}
                           </Badge>
                         ))}
                       </div>
